@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonButtons</title>
+
+    <style>
+        
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--pageBackground);
+        }
+
+        *{
+            --bcolor: #4D77FF;
+            --acolor: #93FFD8;
+            --pageBackground: #1B2430;
+        }        
+
+        .Neon_Button{
+            position: relative;
+            background-color: transparent;
+            border: var(--bcolor) 2px solid;
+            box-shadow: var(--bcolor) 0px 0px 5px, var(--bcolor) 0px 0px 5px inset;
+            padding: 10px;
+            color: var(--bcolor);
+            margin: 8px;
+            text-align: center;
+            vertical-align: middle;
+            height: auto;
+            letter-spacing: 0.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: Consolas;
+            text-decoration: none;
+        }
+
+        .Neon_Button:before,
+        .Neon_Button:after{
+            transition: 0.3s;
+            content: "";
+            position: absolute;
+            background-color: transparent;
+            border: var(--bcolor) 2px solid;
+            box-shadow: var(--bcolor) 0px 0px 5px, var(--bcolor) 0px 0px 3px inset;
+            background-color: var(--pageBackground);
+        }
+
+        .Neon_Button:before{
+            width: 10px;
+            height: 5px;
+            top: -5px;
+            left: 5px;
+        }
+
+        .Neon_Button:after{
+            width: 10px;
+            height: 5px;
+            bottom: -5px;
+            right: 5px;
+        }
+
+        .Neon_Button:hover::before{
+            transition: .3s;
+            width: 25px;
+            left: calc(100% - 35px);
+        }
+
+        .Neon_Button:hover::after{
+            transition: .3s;
+            width: 25px;
+            right: calc(100% - 35px);
+        }
+
+        .Neon_Button:hover{
+            transition: 0.3s;
+            letter-spacing: 0.2rem;
+        }
+
+        .Neon_Button:active{
+            transition: 0s;
+            background-color: transparent;
+            border: var(--acolor) 2px solid;
+            box-shadow: var(--acolor) 0px 0px 5px;
+            color: var(--acolor);
+        }
+
+        .Neon_Button:active::after,
+        .Neon_Button:active::before{
+            transition: 0s;
+            background-color: transparent;
+            border: var(--acolor) 2px solid;
+            box-shadow: var(--acolor) 0px 0px 5px;
+            color: var(--acolor);
+            background-color: var(--acolor);
+        }
+
+    </style>
+
+</head>
+<body>
+    <button class="Neon_Button">Test Button</button>
+    <button class="Neon_Button" style="--bcolor: #FA1E0E; --acolor: #52DE97;">Test Button 2</button>
+</body>
+</html>
