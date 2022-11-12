@@ -9,7 +9,7 @@
     <style>
         .box{
             width: 100vw;
-            height: 100vh;
+            height: 50vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,10 +28,24 @@
             100% {  box-shadow: 0px 0px 0px 0px #f1c40f; }
         }
     </style>
+
+    <script>
+        function apply(){
+            let button = document.getElementById("noticeButton")
+            if(button.classList.contains("notice_me")){
+                button.classList.remove("notice_me")
+            }else{
+                button.classList.add("notice_me")
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="box">
-        <button class="notice_me">Notice me</button>
+        <button id="noticeButton" class="notice_me">Notice me</button>
+    </div>
+    <div class="box">
+        <button onclick="apply()">Apply</button>
     </div>
 </body>
 </html>

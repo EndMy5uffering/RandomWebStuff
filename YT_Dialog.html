@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>temp</title>
+    <script>
+    const openDialog = () =>
+    { 
+        var elems = `
+        <div> 
+            <style> 
+                .MyTextContainer{ 
+                    display: flex; 
+                    flex-direction: column; 
+                    width: 50vw; 
+                    height: 50vh; 
+                    position: relative; 
+                    top: 25vh; 
+                    left: 25vw; 
+                    border: 2px solid black; 
+                    overflow: hidden; 
+                } 
+                .MyTextBG{ 
+                    position: absolute; 
+                    top: 0; 
+                    left: 0; 
+                    width: 99vw; 
+                    height: 99vh; 
+                    background-color: rgba(0,0,0,0.5); 
+                } 
+                .MyTextInputItem{ 
+                    overflow: auto; 
+                    max-width: 100%; 
+                    width: 100%; 
+                    min-width: 100%; 
+                    flex: 1; 
+                } 
+            </style> 
+            <div class="MyTextBG"></div> 
+            <div class="MyTextContainer"> 
+                <textarea id="MyTextInput" class="MyTextInputItem"type="text"></textarea> 
+                <button onclick="MyGetData()">GET DATA</button>
+                <button onclick="document.querySelector('#MyDialogBox').remove();">CLOSE</button> 
+            </div> 
+        </div>`;
+        var element = document.createElement("div"); 
+        element.id = "MyDialogBox"; 
+        element.innerHTML = elems; 
+        document.body.appendChild(element);
+        var getDataScript = document.createElement('script');
+        getDataScript.innerHTML = `
+        let MyGetData = () => {
+            var MyInput = document.querySelector('#MyTextInput');
+            if(document.location.origin.includes('youtube'))
+            {
+                MyInput.value = "";
+                var vidItems = document.querySelectorAll('ytd-playlist-panel-renderer#playlist.style-scope.ytd-watch-flexy #playlist-items a#wc-endpoint');
+                MyInput.value += "[\\n";
+                var vidList = [];
+                vidItems.forEach(e => {
+                    if(e.href){
+                        let vid = (new URL(e.href)).searchParams.get("v");
+                        
+                        if(vid != undefined && vid != ""){
+                            vidList.push('"https://www.youtube.com//watch?v=' + vid + '"');
+                        }
+                    }
+                });
+                MyInput.value += vidList.join(',\\n');
+                MyInput.value += "\\n]";
+            }else{
+                MyInput.value = "You are not on youtube";
+            }
+        }`;
+        element.appendChild(getDataScript);
+    }
+
+    </script>
+</head>
+<body>
+    <button onclick="openDialog()">Open</button>
+</body>
+</html>
